@@ -10,8 +10,7 @@ def load_data():
     Returns:
         pd.DataFrame
     """
-    # TODO: Use pandas to read the CSV file
-    pass
+    return pd.read_csv("data.csv")
 
 
 # =========================
@@ -27,8 +26,7 @@ def average_marks(df):
     Returns:
         float: Average marks
     """
-    # TODO: Return mean of 'marks' column
-    pass
+    return df["marks"].mean()
 
 
 # =========================
@@ -44,8 +42,8 @@ def top_student(df):
     Returns:
         str: Name of top student
     """
-    # TODO: Find row with highest marks and return name
-    pass
+    top_row = df.loc[df["marks"].idxmax()]
+    return top_row["name"]
 
 
 # =========================
@@ -61,8 +59,7 @@ def passed_students(df):
     Returns:
         pd.DataFrame
     """
-    # TODO: Return filtered DataFrame
-    pass
+    return df[df["marks"] >= 50]
 
 
 # =========================
@@ -81,5 +78,8 @@ def add_grade(df):
     Returns:
         pd.DataFrame
     """
-    # TODO: Create and add 'grade' column
-    pass
+    df = df.copy()
+    df["grade"] = df["marks"].apply(
+        lambda marks: "A" if marks >= 75 else ("B" if marks >= 50 else "C")
+    )
+    return df
